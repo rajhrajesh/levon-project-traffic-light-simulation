@@ -1,0 +1,177 @@
+:root {
+  --light-color-off: #ddd;
+  --light-color-green: green;
+  --light-color-yellow: yellow;
+  --light-color-red: red;
+  --button-color-inactive: green;
+  --button-color-active: red;
+  --button-text-color: white;
+  --traffic-light-border: #333;
+  --button-hover-color: darkgreen;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background: url("https://res.cloudinary.com/de8cab9qa/image/upload/v1726537566/f3fe2c35-a765-41e9-a3b1-4eee856cecad_1_qo9s7l.jpg") no-repeat center center/cover;
+}
+
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+  padding: 20px;
+  border: 2px solid var(--traffic-light-border);
+  border-radius: 10px;
+  background-color: rgba(41, 37, 37, 0.9); /* Slight transparency */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 20px auto;
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  transition: width 0.3s, padding 0.3s, right 0.3s, top 0.3s;
+}
+
+/* Adjust the light size and spacing dynamically */
+.light {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: var(--light-color-off);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.5s ease, width 0.3s, height 0.3s, margin 0.3s;
+}
+
+/* For small screens */
+@media (max-width: 600px) {
+  .traffic-light {
+    width: 90px;
+    padding: 15px;
+    right: 5px;
+    top: 20px;
+  }
+
+  .light {
+    width: 80px;
+    height: 80px;
+    margin: 8px;
+  }
+}
+
+/* For very small screens (like mobile in portrait mode) */
+@media (max-width: 400px) {
+  .traffic-light {
+    width: 80px;
+    padding: 10px;
+    right: 5px;
+    top: 10px;
+  }
+
+  .light {
+    width: 70px;
+    height: 70px;
+    margin: 6px;
+  }
+}
+
+/* For larger screens */
+@media (min-width: 1000px) {
+  .traffic-light {
+    width: 130px;
+    padding: 25px;
+    right: 20px;
+    top: 50px;
+  }
+
+  .light {
+    width: 120px;
+    height: 120px;
+    margin: 12px;
+  }
+}
+
+
+.green {
+  background-color: var(--light-color-green);
+  box-shadow: 0 0 25px rgba(76, 175, 80, 0.7); /* Add green glow when active */
+}
+
+.yellow {
+  background-color: var(--light-color-yellow);
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.7); /* Add yellow glow when active */
+}
+
+.red {
+  background-color: var(--light-color-red);
+  box-shadow: 0 0 25px rgba(244, 67, 54, 0.7); /* Add red glow when active */
+}
+
+.timer-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  text-align: center;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-color-inactive);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: var(--button-hover-color);
+  transform: scale(1.05);
+}
+
+button[aria-label*='Activate'] {
+  background-color: var(--button-color-inactive);
+}
+
+button[aria-label*='Deactivate'] {
+  background-color: var(--button-color-active);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .traffic-light {
+    width: 100px;
+  }
+  .light {
+    width: 80px;
+    height: 80px;
+  }
+  .timer-display {
+    font-size: 1.2rem;
+  }
+  button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
