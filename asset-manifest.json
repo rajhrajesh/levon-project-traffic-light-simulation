@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/levon-project-traffic-light-simulation/static/css/main.3488befb.css",
+    "main.js": "/levon-project-traffic-light-simulation/static/js/main.f7aaf52d.js",
+    "static/js/453.9581ebce.chunk.js": "/levon-project-traffic-light-simulation/static/js/453.9581ebce.chunk.js",
+    "index.html": "/levon-project-traffic-light-simulation/index.html",
+    "main.3488befb.css.map": "/levon-project-traffic-light-simulation/static/css/main.3488befb.css.map",
+    "main.f7aaf52d.js.map": "/levon-project-traffic-light-simulation/static/js/main.f7aaf52d.js.map",
+    "453.9581ebce.chunk.js.map": "/levon-project-traffic-light-simulation/static/js/453.9581ebce.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3488befb.css",
+    "static/js/main.f7aaf52d.js"
+  ]
+}
