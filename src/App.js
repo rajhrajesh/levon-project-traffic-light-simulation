@@ -1,77 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GreenLight from './components/GreenLight';
 import YellowLight from './components/YellowLight';
 import RedLight from './components/RedLight';
-import PedestrianButton from './components/PedestrainButton';
-import EmergencyOverrideButton from './components/EmergencyOverrideButton';
-
+import Pedestrian from './components/Pedestrain';
+import EmergencyOverride from './components/EmergencyOverride';
+import { TrafficLightContext } from './context/TrafficLightContext';
 import './App.css';
 
 const App = () => {
-  const [currentLight, setCurrentLight] = useState('green');
-  const [timer, setTimer] = useState(10);
-  const [pedestrianRequested, setPedestrianRequested] = useState(false);
-  const [emergencyOverride, setEmergencyOverride] = useState(false);
+  const { state, dispatch } = useContext(TrafficLightContext);
+  const { currentLight, timer, emergencyOverride, pedestrianRequested } = state;
 
   useEffect(() => {
     const switchLight = () => {
-      if (currentLight === 'green') {
-        if (pedestrianRequested) {
-          console.log('Pedestrian requested: switching to red light for pedestrian crossing.');
-          setCurrentLight('red');
-          setTimer(7);
-          setPedestrianRequested(false);
-        } else {
-          console.log('Switching from green to yellow.');
-          setCurrentLight('yellow');
-          setTimer(3);
-        }
-      } else if (currentLight === 'yellow') {
-        console.log('Switching from yellow to red.');
-        setCurrentLight('red');
-        setTimer(7);
-      } else if (currentLight === 'red') {
-        console.log('Switching from red to green.');
-        setCurrentLight('green');
-        setTimer(10);
-      }
+      dispatch({ type: 'CHANGE_LIGHT' });
     };
 
-    // Handle emergency override state
     if (emergencyOverride) {
       console.log('Emergency override activated: switching to red light.');
-      setCurrentLight('red');
-      setTimer(7);
       return;
     }
 
-    // Manage the timer and light switching
     if (timer > 0) {
-      const countdown = setTimeout(() => setTimer(timer - 1), 1000);
+      const countdown = setTimeout(() => dispatch({ type: 'TICK' }), 1000);
       return () => clearTimeout(countdown);
     } else {
       switchLight();
     }
-  }, [currentLight, timer, pedestrianRequested, emergencyOverride]);
+  }, [timer, emergencyOverride, dispatch]);
 
   const handlePedestrianRequest = () => {
     if (currentLight === 'green' || currentLight === 'yellow') {
-      setPedestrianRequested(true);
+      dispatch({ type: 'PEDESTRIAN_REQUEST' });
       console.log('Pedestrian request registered. Light will turn red after the current cycle.');
-    } else {
-      console.log('Already red. Pedestrian can cross.');
     }
   };
 
   const handleEmergencyOverride = () => {
-    const newEmergencyState = !emergencyOverride;
-    setEmergencyOverride(newEmergencyState);
-    
-    if (newEmergencyState) {
-      console.log('Emergency override activated. Switching to red light.');
-    } else {
-      console.log('Emergency override deactivated. Normal light cycle resumed.');
-    }
+    dispatch({ type: 'EMERGENCY_OVERRIDE' });
+    console.log(emergencyOverride ? 'Emergency override deactivated.' : 'Emergency override activated.');
   };
 
   return (
@@ -84,8 +51,8 @@ const App = () => {
       <div className="timer-display">
         Time left: {timer} seconds
       </div>
-      <PedestrianButton onClick={handlePedestrianRequest} />
-      <EmergencyOverrideButton
+      <Pedestrian onClick={handlePedestrianRequest} isActive={pedestrianRequested} />
+      <EmergencyOverride
         isActive={emergencyOverride}
         onClick={handleEmergencyOverride}
       />
