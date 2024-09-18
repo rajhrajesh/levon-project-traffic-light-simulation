@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import GreenLight from './components/GreenLight';
 import YellowLight from './components/YellowLight';
 import RedLight from './components/RedLight';
-import Pedestrian from './components/Pedestrain';
+import PedestrianButton from './components/PedestrainButton';
 import EmergencyOverride from './components/EmergencyOverride';
 import { TrafficLightContext } from './context/TrafficLightContext';
 import './App.css';
@@ -51,7 +51,7 @@ const App = () => {
       <div className="timer-display">
         Time left: {timer} seconds
       </div>
-      <Pedestrian onClick={handlePedestrianRequest} isActive={pedestrianRequested} />
+      <PedestrianButton onClick={handlePedestrianRequest} isActive={pedestrianRequested} />
       <EmergencyOverride
         isActive={emergencyOverride}
         onClick={handleEmergencyOverride}
